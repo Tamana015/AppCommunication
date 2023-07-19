@@ -1,40 +1,36 @@
-var SendIntentAndroid = require('react-native-send-intent');
+import {AppNames} from '../../navigator/appDetails';
+import {NativeModules} from 'react-native';
 
-export const deepLinkToApp = ({
-  appToCall,
-  appToState,
-  callbackApp,
-  callbackState,
+const {LinkingCalls} = NativeModules;
+
+export const openApp = ({
+  app,
+  screen,
+  action,
+  isNewRequest,
   data,
-  packageToCall,
-  callbackPackageName,
+  callBackScreen,
+  callBackAction,
 }) => {
-  let routeData, url;
-  if (!data && !callbackPackageName) {
-    routeData = undefined;
-  } else {
-    routeData = data ? {...data} : {};
-    callbackApp ? (routeData.appToCall = callbackApp) : routeData;
-    callbackState ? (routeData.appToState = callbackState) : routeData;
-    callbackPackageName
-      ? (routeData.packageToCall = callbackPackageName)
-      : routeData;
-    routeData = JSON.stringify({...routeData});
+  const requestObject = {
+    screen: screen,
+    action: action,
+    isNewRequest: isNewRequest,
+    data: data,
+  };
+
+  if (callBackScreen) {
+    requestObject.callBackScreen = callBackScreen;
+    requestObject.callBackAction = callBackAction;
+    requestObject.callBackApp = AppNames.DT;
   }
-  url = `${appToCall}:///${appToState}`;
-  if (routeData !== undefined) {
-    url = `${url}?data=${routeData}`;
-  }
-  console.warn(url);
-  SendIntentAndroid.openAppWithData(packageToCall, url)
-    .then(prom => {
-      console.log(prom);
-    })
-    .catch(e => {
-      console.log(e);
-    });
+  LinkingCalls.openApp(app, screen, JSON.stringify(requestObject));
 };
 
 export const parseUri = data => {
-  return JSON.parse(data?.params?.data);
+  if (data?.params && data?.params?.data) {
+    const decodedJSON = decodeURIComponent(data?.params?.data);
+    return JSON.parse(decodedJSON);
+  }
+  return {};
 };
