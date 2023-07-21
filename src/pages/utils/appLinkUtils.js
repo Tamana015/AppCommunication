@@ -18,12 +18,14 @@ export const openApp = ({
     isNewRequest: isNewRequest,
     data: data,
   };
+  console.log('==== callBackScreen ====', callBackScreen);
 
   if (callBackScreen) {
     requestObject.callBackScreen = callBackScreen;
     requestObject.callBackAction = callBackAction;
-    requestObject.callBackApp = AppNames.DT;
+    requestObject.callBackApp = AppNames.MPOS;
   }
+  console.log('===== ', requestObject);
   LinkingCalls.openApp(app, screen, JSON.stringify(requestObject));
 };
 

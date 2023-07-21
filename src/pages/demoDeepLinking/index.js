@@ -15,13 +15,27 @@ export const DemoDeepLinking = ({route}) => {
 
   const updateRoute = useCallback(screenType => {
     setRoutename(screenType);
+    let data = {siteId: '1002'};
+    switch (screenType) {
+      case 'create-appointment':
+        data = createApptJson;
+        break;
+      case 'modify-appointment':
+        data = {workOrderId: '0WO6u000000DosZGAS'};
+        break;
+      default:
+        data = {siteId: '1002'};
+    }
+
+    setApptData(JSON.stringify(data));
+    updateData(data);
   }, []);
 
-  const onAppointment = useCallback(data => {
+  const onAppointment = useCallback(async data => {
     try {
       setApptData(data);
       setJsonFormatValid(true);
-      const jsonObject = JSON.parse(data);
+      const jsonObject = await JSON.parse(data);
       updateData(jsonObject);
     } catch (error) {
       setJsonFormatValid(false);
@@ -32,7 +46,7 @@ export const DemoDeepLinking = ({route}) => {
     'create-appointment',
     'appointment-list',
     'available-appointment',
-    'view-appointment',
+    'modify-appointment',
   ];
 
   const validateJson = useCallback(() => {
@@ -47,7 +61,7 @@ export const DemoDeepLinking = ({route}) => {
         data: data,
         callbackAction: ActionNames.GOTOPB,
         callbackApp: AppNames.DT,
-        callbackState: StateNames.deeplinkingState,
+        callBackScreen: StateNames.deeplinkingState,
       });
     }
   }, [routeName, isValidJson, data]);
@@ -99,6 +113,7 @@ export const DemoDeepLinking = ({route}) => {
           rowTextStyle={{color: '#444', textAlign: 'left'}}
         />
       </View>
+
       <Button
         title={'Open MAPPT'}
         onPress={validateJson}
