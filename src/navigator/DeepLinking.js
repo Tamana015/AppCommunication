@@ -30,6 +30,9 @@ export const getRouteData = data => {
       case 'search':
         routeName = Routes.search;
         break;
+      case 'open-appointment-order':
+        routeName = 'open-appointment-order';
+        break;
       default:
         routeName = Routes.home;
         break;

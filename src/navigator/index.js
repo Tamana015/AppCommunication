@@ -60,6 +60,19 @@ const Navigator = ({initialProps}) => {
           },
         }}
       />
+      <RootStack.Screen
+        name={'open-appointment-order'}
+        component={HandleDifferentLinking}
+        initialParams={{...initialProps?.data}}
+        options={{
+          headerTitleAlign: 'center',
+          headerStyle: {
+            borderBottomWidth: 1,
+            borderBottomColor: 'black',
+            elevation: 0,
+          },
+        }}
+      />
     </RootStack.Navigator>
   );
 };
