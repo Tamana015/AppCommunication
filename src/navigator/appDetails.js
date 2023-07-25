@@ -9,6 +9,7 @@ export const PackageNames = {
 export const AppNames = {
   MPOS: 'mpos',
   DT: 'dt',
+  SNS: ' sns',
   MAPPT: 'mappt',
 };
 

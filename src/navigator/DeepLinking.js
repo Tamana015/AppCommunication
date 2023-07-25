@@ -2,22 +2,35 @@ import {AppNames} from './appDetails';
 import {Routes} from './routeNames';
 
 export const linking = {
-  prefixes: [`${AppNames.MAPPT}://`],
+  prefixes: [`${AppNames.MPOS}://`, `${AppNames.SNS}://`],
   config: {
     screens: {
-      [Routes.home]: 'home',
+      [Routes.home]: 'Home',
     },
   },
 };
 export const getRouteData = data => {
-  let routeName = 'home';
+  let routeName = data.screen || 'Home';
   let isNewRequest = false;
   let payload = {};
   try {
-    payload = JSON.parse(data);
+    if (data?.data) {
+      payload = JSON.parse(data.data);
+    } else {
+      payload = JSON.parse(data);
+    }
     isNewRequest = payload.isNewRequest;
     switch (payload.screen) {
-      case 'home':
+      case 'Home':
+        routeName = Routes.home;
+        break;
+      case 'start-a-vtv':
+        routeName = Routes.startVtv;
+        break;
+      case 'search':
+        routeName = Routes.search;
+        break;
+      default:
         routeName = Routes.home;
         break;
     }

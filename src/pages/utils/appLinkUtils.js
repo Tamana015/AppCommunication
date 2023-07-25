@@ -18,21 +18,31 @@ export const openApp = ({
     isNewRequest: isNewRequest,
     data: data,
   };
-  console.log('==== callBackScreen ====', callBackScreen);
 
   if (callBackScreen) {
     requestObject.callBackScreen = callBackScreen;
     requestObject.callBackAction = callBackAction;
     requestObject.callBackApp = AppNames.MPOS;
   }
-  console.log('===== ', requestObject);
+  console.warn(app, screen, requestObject);
   LinkingCalls.openApp(app, screen, JSON.stringify(requestObject));
 };
 
-export const parseUri = data => {
-  if (data?.params && data?.params?.data) {
-    const decodedJSON = decodeURIComponent(data?.params?.data);
-    return JSON.parse(decodedJSON);
+export const parseUri = data1 => {
+  let data = data1?.params?.data;
+
+  if (data) {
+    if (typeof data === 'string') {
+      try {
+        data = decodeURIComponent(data);
+      } catch (err) {}
+      data = JSON.parse(data);
+    }
   }
-  return {};
+  return data || {};
+  // if (data?.params && data?.params?.data) {
+  //   const decodedJSON = decodeURIComponent(data?.params?.data);
+  //   return JSON.parse(decodedJSON);
+  // }
+  // return {};
 };

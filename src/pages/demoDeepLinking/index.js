@@ -60,7 +60,7 @@ export const DemoDeepLinking = ({route}) => {
         isNewRequest: true,
         data: data,
         callbackAction: ActionNames.GOTOPB,
-        callbackApp: AppNames.DT,
+        callbackApp: AppNames.MPOS,
         callBackScreen: StateNames.deeplinkingState,
       });
     }
