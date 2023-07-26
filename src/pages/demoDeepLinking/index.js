@@ -67,7 +67,11 @@ export const DemoDeepLinking = ({route}) => {
   }, [routeName, isValidJson, data]);
 
   React.useEffect(() => {
-    if (route?.params && route.params) {
+    if (
+      route?.params &&
+      Object.keys(route?.params).length > 0 &&
+      !(Object.keys(route?.params).length == 1 && route?.params?.screen)
+    ) {
       const params = parseUri(route);
       alert('Response : ' + JSON.stringify(params));
     }
