@@ -15,7 +15,7 @@ export const DemoDeepLinking = ({route}) => {
 
   const updateRoute = useCallback(screenType => {
     setRoutename(screenType);
-    let data = {siteId: '1002'};
+    let data = {siteId: '1284'};
     switch (screenType) {
       case 'create-appointment':
         data = createApptJson;
@@ -24,7 +24,7 @@ export const DemoDeepLinking = ({route}) => {
         data = {workOrderId: '0WO6u000000DosZGAS'};
         break;
       default:
-        data = {siteId: '1002'};
+        data = {siteId: '1284'};
     }
 
     setApptData(JSON.stringify(data));
@@ -70,7 +70,7 @@ export const DemoDeepLinking = ({route}) => {
     if (
       route?.params &&
       Object.keys(route?.params).length > 0 &&
-      !(Object.keys(route?.params).length == 1 && route?.params?.screen)
+      !(Object.keys(route?.params).length === 1 && route?.params?.screen)
     ) {
       const params = parseUri(route);
       alert('Response : ' + JSON.stringify(params));
