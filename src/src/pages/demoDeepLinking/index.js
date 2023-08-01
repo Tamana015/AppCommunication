@@ -107,62 +107,77 @@ export const DemoDeepLinking = ({route}) => {
   }, [route]);
 
   return (
-    <View style={{margin: 16}}>
-      <TextInput
-        label="json string for object"
-        showField={true}
-        value={apptData}
-        onChangeText={onAppointment}
+    <View>
+      <View
         style={{
-          height: 150,
-          backgroundColor: '#FFF',
-          borderRadius: 8,
-          borderWidth: 1,
-          borderColor: '#444',
-          marginBottom: 20,
-        }}
-        editable
-        multiline
-        numberOfLines={4}
-      />
-
-      <View>
-        <Text color="black">App state/ screen route name </Text>
-        <SelectDropdown
-          data={Screens}
-          buttonStyle={{
-            width: '100%',
-            height: 50,
+          backgroundColor: '#404040',
+          padding: 4,
+          marginBottom: 15,
+        }}>
+        <Text style={{fontSize: 13, textAlign: 'center', color: 'white'}}>
+          Version 2.0
+        </Text>
+      </View>
+      <View style={{margin: 8}}>
+        <TextInput
+          label="json string for object"
+          showField={true}
+          value={apptData}
+          onChangeText={onAppointment}
+          style={{
+            height: 150,
             backgroundColor: '#FFF',
             borderRadius: 8,
             borderWidth: 1,
             borderColor: '#444',
             marginBottom: 20,
           }}
-          onSelect={(selectedItem, index) => {
-            updateRoute(selectedItem);
-          }}
-          rowStyle={{backgroundColor: '#EFEFEF', borderBottomColor: '#C5C5C5'}}
-          rowTextStyle={{color: '#444', textAlign: 'left'}}
+          editable
+          multiline
+          numberOfLines={4}
         />
-      </View>
 
-      <Button
-        title={'Open MAPPT'}
-        onPress={validateJson}
-        color="red"
-        enableRedButton={false}
-        disabled={false}
-      />
+        <View>
+          <Text color="black">App state/ screen route name </Text>
+          <SelectDropdown
+            data={Screens}
+            buttonStyle={{
+              width: '100%',
+              height: 50,
+              backgroundColor: '#FFF',
+              borderRadius: 8,
+              borderWidth: 1,
+              borderColor: '#444',
+              marginBottom: 20,
+            }}
+            onSelect={(selectedItem, index) => {
+              updateRoute(selectedItem);
+            }}
+            rowStyle={{
+              backgroundColor: '#EFEFEF',
+              borderBottomColor: '#C5C5C5',
+            }}
+            rowTextStyle={{color: '#444', textAlign: 'left'}}
+          />
+        </View>
 
-      <View style={{margin: 16}}>
         <Button
-          title={'Open S and S'}
-          onPress={openSalesApp}
-          color="green"
+          title={'Open MAPPT'}
+          onPress={validateJson}
+          color="red"
           enableRedButton={false}
           disabled={false}
         />
+
+        <View style={{margin: 16}}>
+          <Button
+            title={'Open S and S'}
+            onPress={openSalesApp}
+            color="green"
+            enableRedButton={false}
+            disabled={false}
+          />
+        </View>
       </View>
     </View>
   );
