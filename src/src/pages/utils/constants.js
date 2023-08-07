@@ -12,7 +12,7 @@ export const createApptJson = {
   address2: 'Apt 450',
   city: 'Phoenix',
   state: 'AZ',
-  country: 'US',
+  country: 'United States',
   zipCode: '85250',
   customerType: 'Person',
   businessPrimaryPurchasingPhoneCollection: [
